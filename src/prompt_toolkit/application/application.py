@@ -1411,11 +1411,7 @@ class _CombinedRegistry(KeyBindingsBase):
     def _key_bindings(self) -> KeyBindingsBase:
         current_window = self.app.layout.current_window
         other_controls = list(self.app.layout.find_all_controls())
-        key = current_window, frozenset(other_controls)
-
-        return self._cache.get(
-            key, lambda: self._create_key_bindings(current_window, other_controls)
-        )
+        return self._create_key_bindings(current_window, other_controls)
 
     def get_bindings_for_keys(self, keys: KeysTuple) -> list[Binding]:
         return self._key_bindings.get_bindings_for_keys(keys)
